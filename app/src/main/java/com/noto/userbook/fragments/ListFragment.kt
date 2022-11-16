@@ -48,6 +48,7 @@ class ListFragment : Fragment() {
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.addFragment)
         }
+
     }
 
 

@@ -3,8 +3,11 @@ package com.noto.userbook.data
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.ListFragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.userbook.R
+import com.noto.userbook.fragments.ListFragmentDirections
 import com.noto.userbook.model.User
 import kotlinx.android.synthetic.main.item_layout.view.*
 
@@ -13,6 +16,7 @@ class ListAdapter:RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
 
     private var userList = emptyList<User>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_layout,parent,false))
@@ -24,6 +28,15 @@ class ListAdapter:RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.age.text = currentItem.age.toString()
         holder.itemView.first_name.text = currentItem.firstName
         holder.itemView.last_name.text = currentItem.lastName
+
+        holder.itemView.item_id.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToAddFragment()
+            holder.itemView.findNavController().navigate(action)
+
+
+
+        }
+
 
     }
 
