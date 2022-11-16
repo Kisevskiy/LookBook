@@ -17,11 +17,12 @@ import com.noto.userbook.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
 
-    private var _binding:FragmentListBinding? = null
+    private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
     lateinit var mUserViewModel: UserViewModel
     lateinit var recyclerView: RecyclerView
+    lateinit var  adapter: ListAdapter
 
 
     override fun onCreateView(
@@ -29,7 +30,7 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentListBinding.inflate(inflater,container,false)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
         init()
         return binding.root
     }
@@ -41,15 +42,28 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
 
         mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
-        mUserViewModel.readAllData.observe(viewLifecycleOwner, Observer {user->
+        mUserViewModel.readAllData.observe(viewLifecycleOwner, Observer { user ->
             adapter.setData(user)
         })
 
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.addFragment)
+
+
+
+            }
         }
+
+
+
+
+
 
     }
 
 
-}
+
+
+
+
+
