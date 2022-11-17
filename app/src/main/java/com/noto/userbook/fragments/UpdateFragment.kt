@@ -3,10 +3,8 @@ package com.noto.userbook.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavArgs
@@ -18,6 +16,7 @@ import com.noto.userbook.data.UserViewModel
 import com.noto.userbook.databinding.FragmentUpdateBinding
 import com.noto.userbook.model.User
 import kotlinx.android.synthetic.main.fragment_update.view.*
+import java.util.zip.Inflater
 
 
 class UpdateFragment : Fragment() {
@@ -32,10 +31,11 @@ class UpdateFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
        _binding = FragmentUpdateBinding.inflate(inflater,container,false)
         init()
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -69,5 +69,8 @@ class UpdateFragment : Fragment() {
         return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_menu,menu)
+    }
 }
+
